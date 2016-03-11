@@ -19,12 +19,17 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loaders: ['react-hot', 'babel'],
         include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
+        loader: 'style-loader!css-loader?modules&localIdentName=[name]-[local]--[hash:base64:5]',
+        exclude: /node_modules\/bootstrap/
+      },
+      {
+        test: /bootstrap.min.css$/,
         loader: 'style-loader!css-loader'
       },
       {
@@ -32,5 +37,10 @@ module.exports = {
         loader: 'file-loader?name=[name]@[hash].[ext]'
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '#components': __dirname + '/src/components'
+    }
   }
 };
