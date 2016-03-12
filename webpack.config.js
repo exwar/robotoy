@@ -25,15 +25,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        loader: 'style-loader!css-loader',
+        exclude: /components/
+      },
+      {
+        test: /components\/.*\.css$/,
         loader: 'style-loader!css-loader?modules&localIdentName=[name]-[local]--[hash:base64:5]',
-        exclude: /node_modules\/bootstrap/
       },
       {
-        test: /bootstrap.min.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.(svg|eot|otf|woff|ttf|woff2)$/,
+        test: /\.(svg|eot|otf|woff|ttf|woff2)/,
         loader: 'file-loader?name=[name]@[hash].[ext]'
       }
     ]

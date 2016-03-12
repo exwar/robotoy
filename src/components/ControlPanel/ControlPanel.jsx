@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Panel, Input, Button, ButtonGroup } from 'react-bootstrap';
+import { NotificationManager } from 'react-notifications';
 
 import styles from './ControlPanel.css'
 
@@ -24,10 +25,17 @@ class ControlPanel extends Component {
     </Row> : null;
   }
 
-  renderOutput () {
+  renderReport () {
     const { isPlaced } = this.props;
 
-    return false ? <Input type="textarea" className={styles.output} standalone readOnly /> : null;
+    return isPlaced ? <Row>
+      <Col xs={9}>
+        <Input type="text" bsSize="large" disabled />
+      </Col>
+      <Col xs={3}>
+        <Button bsSize="large" bsStyle="info" onClick={() => this.reportPosition()} block>Report</Button>
+      </Col>
+    </Row> : null;
   }
 
   checkCoordExistance (x, y) {
@@ -37,7 +45,7 @@ class ControlPanel extends Component {
     isError = isError || (isNaN(y) || y < 0 || y > 4)
 
     if (isError) {
-      alert('Coords are out of tabletop');
+      NotificationManager.warning(`{x:${x}, y:${y}}`, 'Coordinates are out of tabletop');
     }
 
     return !isError;
@@ -118,7 +126,7 @@ class ControlPanel extends Component {
         </Row>
 
         {this.renderControls()}
-        {this.renderOutput()}
+        {this.renderReport()}
       </form>
     </Panel>
   }

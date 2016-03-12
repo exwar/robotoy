@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { NotificationContainer } from 'react-notifications';
 
 import PageHeader from '#components/PageHeader/PageHeader.jsx';
 import TableTop from '#components/TableTop/TableTop.jsx';
@@ -71,6 +72,8 @@ export default class App extends Component {
         </Col>
         <Col md={1} />
       </Row>
+
+      <NotificationContainer />
     </Grid>
   }
 }
