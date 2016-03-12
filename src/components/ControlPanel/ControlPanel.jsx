@@ -19,7 +19,7 @@ class ControlPanel extends Component {
         </ButtonGroup>
       </Col>
       <Col xs={3}>
-        <Button bsSize="large" bsStyle="primary" block>Move</Button>
+        <Button bsSize="large" bsStyle="primary" onClick={() => this.dispatchMove()} block>Move</Button>
       </Col>
     </Row> : null;
   }
@@ -30,17 +30,28 @@ class ControlPanel extends Component {
     return false ? <Input type="textarea" className={styles.output} standalone readOnly /> : null;
   }
 
+  checkCoordExistance (x, y) {
+    let isError = false;
+
+    isError = isError || (isNaN(x) || x < 0 || x > 4)
+    isError = isError || (isNaN(y) || y < 0 || y > 4)
+
+    if (isError) {
+      alert('Coords are out of tabletop');
+    }
+
+    return !isError;
+  }
+
   dispatchPlaceCoords () {
     const { onPlace } = this.props;
     const xCoord = parseInt(this.refs.x.getValue(), 10);
     const yCoord = parseInt(this.refs.y.getValue(), 10);
     const dir = this.refs.dir.getValue().trim();
 
-    if (isNaN(xCoord) || xCoord < 0 || xCoord > 4) return alert(`Wrong X: ${xCoord}`);
-    if (isNaN(yCoord) || yCoord < 0 || yCoord > 4) return alert(`Wrong Y: ${yCoord}`);
-    if (!dir) return alert('No DIR!');
-
-    onPlace(xCoord, yCoord, dir);
+    if (this.checkCoordExistance(xCoord, yCoord)) {
+      onPlace(xCoord, yCoord, dir);
+    }
   }
 
   dispatchRotation (delta) {
@@ -58,18 +69,27 @@ class ControlPanel extends Component {
   }
 
   dispatchMove() {
-    const { direction, onMove } = this.props;
+    const { position, direction, onMove } = this.props;
+    const newCoords = { ...position };
 
     switch (direction) {
       case 'NORTH':
+        newCoords.y = newCoords.y + 1;
         break;
       case 'EAST':
+        newCoords.x = newCoords.x + 1;
         break;
       case 'SOUTH':
+        newCoords.y = newCoords.y - 1;
         break;
       case 'WEST':
+        newCoords.x = newCoords.x - 1;
         break;
     }
+
+    if (this.checkCoordExistance(newCoords.x, newCoords.y)) {
+      onMove(newCoords);
+    };
   }
 
   render () {

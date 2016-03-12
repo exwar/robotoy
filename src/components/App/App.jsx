@@ -61,11 +61,12 @@ export default class App extends Component {
         </Col>
         <Col md={5}>
           <ControlPanel
+            position={position}
             direction={direction}
             isPlaced={isPlaced}
             onPlace={(x, y, direction) => this.handlePlace(x, y, direction)}
             onRotate={(direction) => this.handleRotate(direction)}
-            onMove={() => this.handleMove()}
+            onMove={(position) => this.handleMove(position)}
           />
         </Col>
         <Col md={1} />
