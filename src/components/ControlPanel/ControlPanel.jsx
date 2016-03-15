@@ -5,7 +5,7 @@ import { NotificationManager } from 'react-notifications';
 import Interactive from '#components/ControlPanel/Interactive.jsx'
 import Programmable from '#components/ControlPanel/Programmable.jsx'
 
-import { directions } from '#components/App/constants';
+import { directions, inputways } from '#components/App/constants';
 
 import styles from './ControlPanel.css'
 
@@ -15,7 +15,7 @@ class ControlPanel extends Component {
     super();
 
     this.state = {
-      way: 'interactive'
+      way: inputways.INTERACTIVE
     };
   }
 
@@ -103,20 +103,20 @@ class ControlPanel extends Component {
           <ButtonGroup justified>
             <Button
               href="#"
-              onClick={(event) => this.toggleInputWay(event, 'interactive')}
-              active={way === 'interactive'}
+              onClick={(event) => this.toggleInputWay(event, inputways.INTERACTIVE)}
+              active={way === inputways.INTERACTIVE}
             >Interactive</Button>
             <Button
               href="#"
-              onClick={(event) => this.toggleInputWay(event, 'programmable')}
-              active={way === 'programmable'}
+              onClick={(event) => this.toggleInputWay(event, inputways.PROGRAMMABLE)}
+              active={way === inputways.PROGRAMMABLE}
             >Programmable</Button>
           </ButtonGroup>
         </Col>
       </Row>
 
       {
-        way === 'interactive' ?
+        way === inputways.INTERACTIVE ?
         <Interactive
           position={position}
           direction={direction}
