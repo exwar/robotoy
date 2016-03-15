@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Row, Col, Panel, Input, Button, ButtonGroup } from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
-import Interactive from '#components/ControlPanel/Interactive.jsx'
-import Programmable from '#components/ControlPanel/Programmable.jsx'
+import Interactive from '#components/ControlPanel/Interactive.jsx';
+import Programmable from '#components/ControlPanel/Programmable.jsx';
 
 import { directions, inputways } from '#components/App/constants';
 
-import styles from './ControlPanel.css'
+import styles from './ControlPanel.css';
 
 class ControlPanel extends Component {
 
@@ -22,8 +22,8 @@ class ControlPanel extends Component {
   checkCoordExistance (x, y) {
     let isError = false;
 
-    isError = isError || (isNaN(x) || x < 0 || x > 4)
-    isError = isError || (isNaN(y) || y < 0 || y > 4)
+    isError = isError || (isNaN(x) || x < 0 || x > 4);
+    isError = isError || (isNaN(y) || y < 0 || y > 4);
 
     if (isError) {
       NotificationManager.warning(`{x:${x}, y:${y}}`, 'Coordinates are out of tabletop');
@@ -135,7 +135,7 @@ class ControlPanel extends Component {
           onMoveDispatch={() => this.dispatchMove()}
         />
       }
-    </Panel>
+    </Panel>;
   }
 }
 

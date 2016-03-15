@@ -4,7 +4,7 @@ import { NotificationManager } from 'react-notifications';
 
 import { directions } from '#components/App/constants';
 
-import styles from './ControlPanel.css'
+import styles from './ControlPanel.css';
 
 class Interactive extends Component {
   reportPosition () {
@@ -100,7 +100,7 @@ class Interactive extends Component {
       { this.renderPlace() }
       { this.renderControls() }
       { this.renderReport() }
-    </form>
+    </form>;
   }
 }
 

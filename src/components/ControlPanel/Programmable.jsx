@@ -4,7 +4,7 @@ import { NotificationManager } from 'react-notifications';
 
 import { directions, presets } from '#components/App/constants';
 
-import styles from './ControlPanel.css'
+import styles from './ControlPanel.css';
 
 class Programmable extends Component {
   constructor () {
@@ -107,14 +107,14 @@ class Programmable extends Component {
                 this.toggleRunState(false);
               }
 
-              this.executeCodeString(codeStrings[i])
+              this.executeCodeString(codeStrings[i]);
             } catch (e) {
-              NotificationManager.error(e.message)
+              NotificationManager.error(e.message);
             }
           }, 300 * i);
         }
     } else {
-      NotificationManager.warning('Enter the code, please')
+      NotificationManager.warning('Enter the code, please');
     }
   }
 
@@ -146,7 +146,7 @@ class Programmable extends Component {
       codeInputProps = {
         ...codeInputProps,
         bsStyle: 'success'
-      }
+      };
     }
 
     return <Input {...codeInputProps} />;
@@ -165,7 +165,7 @@ class Programmable extends Component {
           })
         }
       </Col>
-    </Row>
+    </Row>;
   }
 
   handleCodeChange () {
@@ -214,7 +214,7 @@ class Programmable extends Component {
             >Run</Button>
         </Col>
       </Row>
-    </div>
+    </div>;
   }
 }
 

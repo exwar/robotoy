@@ -19,7 +19,7 @@ export default class App extends Component {
       },
       direction: directions.SOUTH,
       isPlaced: false
-    }
+    };
   }
 
   handleReset () {
@@ -90,6 +90,6 @@ export default class App extends Component {
       </Row>
 
       <NotificationContainer />
-    </Grid>
+    </Grid>;
   }
 }

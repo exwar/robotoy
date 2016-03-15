@@ -14,8 +14,8 @@ const TableUnit = ({ active, direction }) => {
     [styles.unit_dir_w]: active && direction === 'WEST'
   });
 
-  return <div className={unitCN}></div>
-}
+  return <div className={unitCN}></div>;
+};
 
 class TableTop extends Component {
   renderUnit (i) {
@@ -36,7 +36,7 @@ class TableTop extends Component {
 
     return <div className={styles.root}>
       {units}
-    </div>
+    </div>;
   }
 }
 

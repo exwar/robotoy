@@ -4,7 +4,7 @@ import { PageHeader } from 'react-bootstrap';
 const Header = () => {
   return <PageHeader>
     RoboToy <small>for REA Group</small>
-  </PageHeader>
-}
+  </PageHeader>;
+};
 
 export default Header;
