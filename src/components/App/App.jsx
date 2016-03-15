@@ -6,6 +6,8 @@ import PageHeader from '#components/PageHeader/PageHeader.jsx';
 import TableTop from '#components/TableTop/TableTop.jsx';
 import ControlPanel from '#components/ControlPanel/ControlPanel.jsx';
 
+import { directions } from '#components/App/constants';
+
 export default class App extends Component {
   constructor () {
     super();
@@ -15,9 +17,20 @@ export default class App extends Component {
         x: 0,
         y: 0
       },
-      direction: 'EAST',
+      direction: directions.SOUTH,
       isPlaced: false
     }
+  }
+
+  handleReset () {
+    this.setState({
+      position: {
+        x: 0,
+        y: 0
+      },
+      direction: directions.SOUTH,
+      isPlaced: false
+    });
   }
 
   handlePlace (x, y, direction) {
@@ -48,7 +61,9 @@ export default class App extends Component {
 
     return <Grid>
       <Row>
-        <PageHeader />
+        <Col xs={12}>
+          <PageHeader />
+        </Col>
       </Row>
 
       <Row>
@@ -68,6 +83,7 @@ export default class App extends Component {
             onPlace={(x, y, direction) => this.handlePlace(x, y, direction)}
             onRotate={(direction) => this.handleRotate(direction)}
             onMove={(position) => this.handleMove(position)}
+            onReset={() => this.handleReset()}
           />
         </Col>
         <Col md={1} />

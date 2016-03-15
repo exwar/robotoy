@@ -2,40 +2,21 @@ import React, { Component } from 'react';
 import { Row, Col, Panel, Input, Button, ButtonGroup } from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
+import Interactive from '#components/ControlPanel/Interactive.jsx'
+import Programmable from '#components/ControlPanel/Programmable.jsx'
+
+import { directions } from '#components/App/constants';
+
 import styles from './ControlPanel.css'
 
 class ControlPanel extends Component {
-  renderControls () {
-    const { isPlaced } = this.props;
 
-    return isPlaced ? <Row className="form-group">
-      <Col xs={9}>
-        <ButtonGroup justified>
-          <Button href="#" bsSize="large" onClick={() => this.dispatchRotation(-1)}>
-            Left
-          </Button>
-          <Button href="#" bsSize="large" onClick={() => this.dispatchRotation(1)}>
-            Right
-          </Button>
-        </ButtonGroup>
-      </Col>
-      <Col xs={3}>
-        <Button bsSize="large" bsStyle="primary" onClick={() => this.dispatchMove()} block>Move</Button>
-      </Col>
-    </Row> : null;
-  }
+  constructor () {
+    super();
 
-  renderReport () {
-    const { isPlaced } = this.props;
-
-    return isPlaced ? <Row>
-      <Col xs={9}>
-        <Input type="text" bsSize="large" disabled />
-      </Col>
-      <Col xs={3}>
-        <Button bsSize="large" bsStyle="info" onClick={() => this.reportPosition()} block>Report</Button>
-      </Col>
-    </Row> : null;
+    this.state = {
+      way: 'interactive'
+    };
   }
 
   checkCoordExistance (x, y) {
@@ -51,20 +32,19 @@ class ControlPanel extends Component {
     return !isError;
   }
 
-  dispatchPlaceCoords () {
+  dispatchPlaceCoords (x, y, direction) {
     const { onPlace } = this.props;
-    const xCoord = parseInt(this.refs.x.getValue(), 10);
-    const yCoord = parseInt(this.refs.y.getValue(), 10);
-    const dir = this.refs.dir.getValue().trim();
+    const intX = parseInt(x, 10);
+    const intY = parseInt(y, 10);
 
-    if (this.checkCoordExistance(xCoord, yCoord)) {
-      onPlace(xCoord, yCoord, dir);
+    if (this.checkCoordExistance(intX, intY)) {
+      onPlace(intX, intY, direction);
     }
   }
 
   dispatchRotation (delta) {
     const { direction, onRotate } = this.props;
-    const dirs = ['NORTH', 'EAST', 'SOUTH', 'WEST'];
+    const dirs = [directions.NORTH, directions.EAST, directions.SOUTH, directions.WEST];
     const currentDirIndex = dirs.indexOf(direction);
     let newDirectionIndex = currentDirIndex + delta;
 
@@ -81,16 +61,16 @@ class ControlPanel extends Component {
     const newCoords = { ...position };
 
     switch (direction) {
-      case 'NORTH':
+      case directions.NORTH:
         newCoords.y = newCoords.y + 1;
         break;
-      case 'EAST':
+      case directions.EAST:
         newCoords.x = newCoords.x + 1;
         break;
-      case 'SOUTH':
+      case directions.SOUTH:
         newCoords.y = newCoords.y - 1;
         break;
-      case 'WEST':
+      case directions.WEST:
         newCoords.x = newCoords.x - 1;
         break;
     }
@@ -100,34 +80,61 @@ class ControlPanel extends Component {
     };
   }
 
+  toggleInputWay (event, wayType) {
+    const { onReset } = this.props;
+
+    onReset();
+
+    this.setState({
+      way: wayType
+    });
+
+    event.preventDefault();
+  }
+
   render () {
+    const { position, direction, isPlaced, onReset } = this.props;
+    const { way } = this.state;
     const headerText = <span>Control panel</span>;
 
     return <Panel header={headerText} bsStyle="info">
-      <form>
-        <Row>
-          <Col xs={3}>
-            <Input ref="x" type="number" bsSize="large" min="0" max="4" defaultValue="0" placeholder="X" />
-          </Col>
-          <Col xs={3}>
-            <Input ref="y" type="number" bsSize="large" min="0" max="4" defaultValue="0" placeholder="Y" />
-          </Col>
-          <Col xs={3}>
-            <Input ref="dir" type="select" bsSize="large" placeholder="Facing" defaultValue="SOUTH">
-              <option value="NORTH">NORTH</option>
-              <option value="SOUTH">SOUTH</option>
-              <option value="EAST">EAST</option>
-              <option value="WEST">WEST</option>
-            </Input>
-          </Col>
-          <Col xs={3}>
-            <Button onClick={() => this.dispatchPlaceCoords()} bsStyle="success" bsSize="large" block>Place</Button>
-          </Col>
-        </Row>
+      <Row className="form-group">
+        <Col xs={12}>
+          <ButtonGroup justified>
+            <Button
+              href="#"
+              onClick={(event) => this.toggleInputWay(event, 'interactive')}
+              active={way === 'interactive'}
+            >Interactive</Button>
+            <Button
+              href="#"
+              onClick={(event) => this.toggleInputWay(event, 'programmable')}
+              active={way === 'programmable'}
+            >Programmable</Button>
+          </ButtonGroup>
+        </Col>
+      </Row>
 
-        {this.renderControls()}
-        {this.renderReport()}
-      </form>
+      {
+        way === 'interactive' ?
+        <Interactive
+          position={position}
+          direction={direction}
+          isPlaced={isPlaced}
+          onPlaceCoordsDispatch={(x, y, direction) => this.dispatchPlaceCoords(x, y, direction)}
+          onRotationDispatch={(delta) => this.dispatchRotation(delta)}
+          onMoveDispatch={() => this.dispatchMove()}
+        /> :
+        <Programmable
+          position={position}
+          direction={direction}
+          isPlaced={isPlaced}
+          onReset={() => onReset()}
+          onPlaceCoordsDispatch={(x, y, direction) => this.dispatchPlaceCoords(x, y, direction)}
+          onRotationDispatch={(delta) => this.dispatchRotation(delta)}
+          onMoveDispatch={() => this.dispatchMove()}
+        />
+      }
     </Panel>
   }
 }
