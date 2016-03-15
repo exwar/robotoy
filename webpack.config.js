@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: './dist/'
+    publicPath: '/robotoy/dist/'
   },
   plugins: DEBUG ? [
     new webpack.HotModuleReplacementPlugin()
