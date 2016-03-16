@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { PageHeader } from 'react-bootstrap';
 import cn from 'classnames';
 
+import { directions } from '#components/App/constants';
 import styles from './TableTop.css';
 
 const TableUnit = ({ active, direction }) => {
@@ -17,7 +18,28 @@ const TableUnit = ({ active, direction }) => {
   return <div className={unitCN}></div>;
 };
 
+TableUnit.propTypes = {
+  direction: PropTypes.oneOf([
+    directions.NORTH,
+    directions.SOUTH,
+    directions.EAST,
+    directions.WEST
+  ]).isRequired,
+  active: PropTypes.bool.isRequired
+}
+
 class TableTop extends Component {
+  static propTypes = {
+    position: PropTypes.object.isRequired,
+    direction: PropTypes.oneOf([
+      directions.NORTH,
+      directions.SOUTH,
+      directions.EAST,
+      directions.WEST
+    ]).isRequired,
+    isPlaced: PropTypes.bool.isRequired
+  }
+
   renderUnit (i) {
     const x = i % 5;
     const y = Math.floor(i / 5);

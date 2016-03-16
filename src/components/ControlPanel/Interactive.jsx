@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Row, Col, Input, Button, ButtonGroup } from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
@@ -7,6 +7,20 @@ import { directions } from '#components/App/constants';
 import styles from './ControlPanel.css';
 
 class Interactive extends Component {
+  static propTypes = {
+    position: PropTypes.object.isRequired,
+    direction: PropTypes.oneOf([
+      directions.NORTH,
+      directions.SOUTH,
+      directions.EAST,
+      directions.WEST
+    ]).isRequired,
+    isPlaced: PropTypes.bool.isRequired,
+    onPlaceCoordsDispatch: PropTypes.func.isRequired,
+    onRotationDispatch: PropTypes.func.isRequired,
+    onMoveDispatch: PropTypes.func.isRequired
+  }
+
   reportPosition () {
     const { position, direction } = this.props;
 

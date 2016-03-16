@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Row, Col, Panel, Input, Button, ButtonGroup } from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
@@ -10,13 +10,23 @@ import { directions, inputways } from '#components/App/constants';
 import styles from './ControlPanel.css';
 
 class ControlPanel extends Component {
+  static propTypes = {
+    position: PropTypes.object.isRequired,
+    direction: PropTypes.oneOf([
+      directions.NORTH,
+      directions.SOUTH,
+      directions.EAST,
+      directions.WEST
+    ]).isRequired,
+    isPlaced: PropTypes.bool.isRequired,
+    onPlace: PropTypes.func.isRequired,
+    onRotate: PropTypes.func.isRequired,
+    onMove: PropTypes.func.isRequired,
+    onReset: PropTypes.func.isRequired
+  }
 
-  constructor () {
-    super();
-
-    this.state = {
-      way: inputways.INTERACTIVE
-    };
+  state = {
+    way: inputways.INTERACTIVE
   }
 
   checkCoordExistance (x, y) {
