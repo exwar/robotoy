@@ -170,7 +170,7 @@ class Programmable extends Component {
 
   handleCodeChange () {
     const { code } = this.refs;
-    const codeText = code.getValue().trim();
+    const codeText = code.getValue();
 
     if (codeText) {
       this.setState({
