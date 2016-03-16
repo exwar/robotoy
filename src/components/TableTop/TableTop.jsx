@@ -26,7 +26,7 @@ TableUnit.propTypes = {
     directions.WEST
   ]).isRequired,
   active: PropTypes.bool.isRequired
-}
+};
 
 class TableTop extends Component {
   static propTypes = {

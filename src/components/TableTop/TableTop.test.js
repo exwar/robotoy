@@ -7,19 +7,30 @@ import styles from './TableTop.css';
 import { directions } from '#components/App/constants';
 
 describe ('TableTop', function () {
+  const position = {
+    x: 0,
+    y: 0
+  };
+  const direction = directions.NORTH;
+
   it('renders without problems', function () {
-    const tableTop = TestUtils.renderIntoDocument(<TableTop />);
+    const tableTopTestProps = {
+      position,
+      direction,
+      isPlaced: true
+    };
+
+    const tableTop = TestUtils.renderIntoDocument(<TableTop
+      { ...tableTopTestProps }
+    />);
 
     expect(tableTop).toExist();
   });
 
   it('renders unit with robot', function () {
     const tableTopTestProps = {
-      position: {
-        x: 0,
-        y: 0
-      },
-      direction: directions.SOUTH,
+      position,
+      direction,
       isPlaced: true
     };
 
