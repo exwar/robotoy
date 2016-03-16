@@ -172,11 +172,9 @@ class Programmable extends Component {
     const { code } = this.refs;
     const codeText = code.getValue();
 
-    if (codeText) {
-      this.setState({
-        code: codeText
-      });
-    }
+    this.setState({
+      code: codeText
+    });
   }
 
   render () {
