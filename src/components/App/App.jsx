@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { NotificationContainer } from 'react-notifications';
 
-import PageHeader from '#components/PageHeader/PageHeader.jsx';
+import Header from '#components/Header/Header.jsx';
 import TableTop from '#components/TableTop/TableTop.jsx';
 import ControlPanel from '#components/ControlPanel/ControlPanel.jsx';
 
 import { directions } from '#components/App/constants';
 
-export default class App extends Component {
+class App extends Component {
   constructor () {
     super();
 
@@ -62,7 +62,7 @@ export default class App extends Component {
     return <Grid>
       <Row>
         <Col xs={12}>
-          <PageHeader />
+          <Header />
         </Col>
       </Row>
 
@@ -93,3 +93,5 @@ export default class App extends Component {
     </Grid>;
   }
 }
+
+export default App;
