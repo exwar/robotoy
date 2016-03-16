@@ -2,6 +2,8 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import { PageHeader } from 'react-bootstrap';
+
 import Header from './Header.jsx';
 
 describe ('Header', function () {

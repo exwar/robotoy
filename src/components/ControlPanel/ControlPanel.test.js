@@ -24,4 +24,14 @@ describe ('ControlPanel', function () {
 
     expect(programmable).toExist();
   });
+
+  it ('performs right coords checking', function () {
+    const controlPanel = TestUtils.renderIntoDocument(<ControlPanel />);
+
+    const trueResult = controlPanel.checkCoordExistance(0,0);
+    const falseResult = controlPanel.checkCoordExistance(25,25);
+
+    expect(trueResult).toBe(true);
+    expect(falseResult).toNotBe(true);
+  });
 });
