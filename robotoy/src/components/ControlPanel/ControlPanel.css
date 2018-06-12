@@ -1,0 +1,13 @@
+.code {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
+  text-transform: uppercase;
+  font-family: monospace;
+  line-height: 1.5;
+}
+
+.output {
+  text-transform: uppercase;
+  font-family: monospace;
+}
