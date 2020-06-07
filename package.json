@@ -7,7 +7,6 @@
     "build": "export NODE_ENV=production && webpack",
     "lint": "eslint --ext .jsx,.js src/**",
     "test": "./node_modules/karma/bin/karma start"
-
   },
   "repository": {
     "type": "git",
@@ -53,7 +52,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
-    "react": "^0.14.6",
+    "react": "^16.13.1",
     "react-dom": "^0.14.6"
   }
 }
