@@ -31,7 +31,7 @@
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.6.2",
-    "expect": "^1.15.2",
+    "expect": "^26.1.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "karma": "^0.13.22",
